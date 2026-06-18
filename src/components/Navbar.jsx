@@ -26,7 +26,7 @@ const Navbar = () => {
     <header className={`navbar ${scrolled ? 'glass scrolled' : ''}`}>
       <div className="container nav-container">
         <a href="#home" className="logo">
-        Portfolio
+        Shiva Portfolio
         </a>
 
         {/* Desktop Nav */}

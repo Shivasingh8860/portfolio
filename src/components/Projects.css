@@ -11,8 +11,8 @@
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   z-index: 1;
   pointer-events: none;
@@ -34,20 +34,22 @@
 
 .project-card {
   min-height: 420px;
-  border-radius: 20px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2.25rem;
-  background: #ffffff;
-  border: 3px solid var(--border-comic);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--border-comic);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .project-card:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 12px 12px 0px rgba(0, 0, 0, 1);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px var(--accent-primary), 0 0 40px var(--accent-glow);
+  border-color: var(--accent-secondary);
 }
 
 .project-content {
@@ -140,12 +142,12 @@
 .tag {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  background: #ffffff;
-  color: #000000;
+  background: transparent;
+  color: var(--accent-secondary);
   padding: 0.4rem 1rem;
-  border-radius: 6px;
-  border: 2px solid var(--border-comic);
-  box-shadow: 2px 2px 0px var(--border-comic);
+  border-radius: 4px;
+  border: 1px solid var(--accent-secondary);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -153,11 +155,10 @@
 }
 
 .project-card:hover .tag {
-  border-color: var(--border-comic);
-  color: #ffffff;
-  background: var(--accent-primary);
-  box-shadow: 4px 4px 0px var(--border-comic);
-  transform: translate(-2px, -2px);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transform: translateY(-2px);
 }
 
 .project-footer {

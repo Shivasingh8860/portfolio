@@ -5,11 +5,12 @@
 .skills-tree-container {
   margin-top: 4rem;
   font-family: var(--font-mono);
-  background: #ffffff;
-  border: 3px solid var(--border-comic);
-  border-radius: 12px;
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--accent-secondary);
+  border-radius: 8px;
   padding: 2.5rem;
-  box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -21,13 +22,13 @@
   gap: 0.75rem;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--accent-secondary);
   margin-bottom: 2rem;
   padding: 0.6rem 1.2rem;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 2px solid var(--border-comic);
-  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+  background: rgba(20, 20, 25, 0.95);
+  border-radius: 4px;
+  border: 1px solid var(--accent-secondary);
+  box-shadow: 0 0 10px var(--accent-secondary);
 }
 
 .root-icon {
@@ -51,7 +52,8 @@
   bottom: 2rem;
   left: 0.75rem; 
   width: 2px;
-  background: var(--border-comic);
+  background: var(--accent-secondary);
+  box-shadow: 0 0 8px var(--accent-secondary);
   z-index: 1;
 }
 
@@ -74,7 +76,8 @@
   top: 50%;
   width: 1.25rem;
   height: 2px;
-  background: var(--border-comic);
+  background: var(--accent-secondary);
+  box-shadow: 0 0 8px var(--accent-secondary);
 }
 
 .branch-icon-wrapper {
@@ -83,11 +86,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background: var(--accent-secondary);
-  border-radius: 8px;
-  border: 2px solid var(--border-comic);
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+  color: var(--accent-primary);
+  background: rgba(10, 10, 12, 0.9);
+  border-radius: 4px;
+  border: 1px solid var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-glow);
   font-size: 1.3rem;
   position: relative;
   z-index: 2;
@@ -117,6 +120,7 @@
   left: 1.2rem;
   width: 2px;
   background: var(--border-comic);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .leaf-node {
@@ -133,31 +137,35 @@
   width: 1.8rem;
   height: 2px;
   background: var(--border-comic);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .skill-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  border: 2px solid var(--border-comic);
+  background: rgba(10, 10, 12, 0.8);
+  border: 1px solid var(--border-comic);
   padding: 0.4rem 0.85rem;
-  border-radius: 6px;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+  border-radius: 4px;
+  box-shadow: 0 0 5px var(--accent-glow);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   z-index: 2;
 }
 
 .skill-badge:hover {
-  background: var(--accent-primary);
-  color: #ffffff;
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+  background: rgba(255, 0, 60, 0.1);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--accent-primary);
+  border-color: var(--accent-primary);
+  animation: glitch-anim 0.3s infinite;
 }
 
 .skill-badge:hover .skill-badge-name {
-  color: #ffffff;
+  color: var(--accent-primary);
+  text-shadow: 2px 0 0 var(--accent-secondary);
 }
 
 .skill-badge-name {
