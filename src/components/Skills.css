@@ -1,0 +1,218 @@
+.skills-section {
+  padding: 10rem 0;
+}
+
+.skills-tree-container {
+  margin-top: 4rem;
+  font-family: var(--font-mono);
+  background: #ffffff;
+  border: 3px solid var(--border-comic);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tree-root-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 2px solid var(--border-comic);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+}
+
+.root-icon {
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+}
+
+.tree-branches {
+  position: relative;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* The main vertical line descending from root */
+.tree-branches::before {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  bottom: 2rem;
+  left: 0.75rem; 
+  width: 2px;
+  background: var(--border-comic);
+  z-index: 1;
+}
+
+.tree-branch {
+  position: relative;
+  z-index: 2;
+}
+
+.branch-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.branch-connector {
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  width: 1.25rem;
+  height: 2px;
+  background: var(--border-comic);
+}
+
+.branch-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: var(--accent-secondary);
+  border-radius: 8px;
+  border: 2px solid var(--border-comic);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.branch-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.branch-leaves {
+  position: relative;
+  padding-left: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* Vertical line for the branch's leaves */
+.branch-vertical-line {
+  position: absolute;
+  top: -1rem;
+  bottom: 1rem;
+  left: 1.2rem;
+  width: 2px;
+  background: var(--border-comic);
+}
+
+.leaf-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Horizontal line for each leaf */
+.leaf-connector {
+  position: absolute;
+  left: -1.8rem;
+  top: 50%;
+  width: 1.8rem;
+  height: 2px;
+  background: var(--border-comic);
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 2px solid var(--border-comic);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.skill-badge:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+}
+
+.skill-badge:hover .skill-badge-name {
+  color: #ffffff;
+}
+
+.skill-badge-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  transition: color 0.3s ease;
+}
+
+.skill-badge-level {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.skill-badge:hover .skill-badge-level {
+  color: var(--accent-secondary);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+@media (max-width: 768px) {
+  .skills-tree-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .tree-branches {
+    padding-left: 1rem;
+  }
+  
+  .tree-branches::before {
+    left: 0.25rem;
+  }
+  
+  .branch-connector {
+    left: -0.75rem;
+    width: 0.75rem;
+  }
+  
+  .branch-leaves {
+    padding-left: 2rem;
+  }
+  
+  .branch-vertical-line {
+    left: 0.8rem;
+  }
+  
+  .leaf-connector {
+    left: -1.2rem;
+    width: 1.2rem;
+  }
+}
