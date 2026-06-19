@@ -51,7 +51,7 @@
   width: 100%;
   max-width: 500px;
   height: 380px;
-  background: rgba(10, 10, 12, 0.85);
+  background: var(--bg-card);
   backdrop-filter: blur(10px);
   border: 2px solid var(--accent-primary);
   border-radius: 4px;
@@ -72,7 +72,7 @@
 
 .window-header {
   height: 45px;
-  background: rgba(20, 20, 25, 0.95);
+  background: var(--bg-secondary);
   border-bottom: 2px solid var(--accent-primary);
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@
 }
 
 .window-tab.active {
-  background: rgba(10, 10, 12, 0.95);
+  background: var(--bg-card);
   color: var(--text-primary);
   border-color: var(--accent-primary);
   border-bottom: 3px solid transparent;
@@ -324,5 +324,41 @@
   
   .hero-actions, .hero-socials {
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content-side {
+    padding: 6rem 1rem 3rem;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .dev-workspace-window {
+    height: 340px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .spidey-name {
+    text-shadow: 2px 0 0 var(--accent-secondary), -2px 0 0 var(--accent-primary);
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .hero-actions a {
+    width: 100%;
+    text-align: center;
+  }
+  .window-tab span {
+    display: none;
+  }
+  .window-tab {
+    padding: 0 0.75rem;
   }
 }

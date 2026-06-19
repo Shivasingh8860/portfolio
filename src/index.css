@@ -13,9 +13,26 @@
   --border-light: rgba(255, 0, 60, 0.3);
   --accent-glow: rgba(255, 0, 60, 0.4);
   
+  --bg-nav: rgba(10, 10, 12, 0.95);
+  
   --font-main: 'Inter', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root[data-theme="light"] {
+  --bg-primary: #f5f8fc;      /* Bright paper white-blue background */
+  --bg-secondary: #e6effd;    /* Light classic blue background */
+  --bg-card: #ffffff;         /* Crisp card background */
+  --text-primary: #111827;    /* Ink black */
+  --text-secondary: #4b5563;  /* Comic slate */
+  --accent-primary: #e23636;  /* Classic Spider-Man Red */
+  --accent-secondary: #0055ff;/* Classic Spider-Man Blue */
+  --accent-tertiary: #ffd000; /* Classic Spider-Man Yellow highlights */
+  --border-comic: #111827;    /* Heavy ink comic border */
+  --border-light: rgba(0, 85, 255, 0.2);
+  --accent-glow: rgba(226, 54, 54, 0.15);
+  --bg-nav: rgba(245, 248, 252, 0.95);
 }
 
 * {
@@ -243,5 +260,26 @@ section {
   
   a, button, input, textarea {
     cursor: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .sticker-element {
+    display: none !important;
+  }
+
+  .btn-primary, .btn-outline {
+    padding: 0.85rem 2rem;
+    font-size: 0.9rem;
   }
 }

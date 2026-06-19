@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 const CustomCursor = () => {
   const [cursorType, setCursorType] = useState('default'); // 'default', 'hover', 'explore', 'type'
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // High performance MotionValues bypassing React state for mousemove
   const mouseX = useMotionValue(0);
@@ -14,6 +15,21 @@ const CustomCursor = () => {
   const ringY = useSpring(mouseY, { stiffness: 180, damping: 24, mass: 0.5 });
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) ||
+        ('ontouchstart' in window || navigator.maxTouchPoints > 0)
+      );
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -70,9 +86,9 @@ const CustomCursor = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible, mouseX, mouseY]);
+  }, [isVisible, mouseX, mouseY, isMobile]);
 
-  if (!isVisible) return null;
+  if (isMobile || !isVisible) return null;
 
   return (
     <>

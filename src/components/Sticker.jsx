@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const Sticker = ({ children, top, left, right, bottom, rotate = 0, color = '#e23636', text, isCircle = false }) => {
   return (
     <motion.div
+      className="sticker-element"
       initial={{ scale: 0, rotate: rotate - 20 }}
       whileInView={{ scale: 1, rotate: rotate }}
       transition={{ type: "spring", bounce: 0.6, duration: 0.8 }}
