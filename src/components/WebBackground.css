@@ -1,0 +1,10 @@
+.web-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Place it behind everything */
+  pointer-events: none; /* Let clicks pass through to UI elements */
+  opacity: 0.8;
+}

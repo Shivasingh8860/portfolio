@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiTerminal, FiImage } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiTerminal, FiImage, FiDownload } from 'react-icons/fi';
 import { GiSpiderWeb } from 'react-icons/gi';
 import profileImg from '../assets/Confident man in a smart suit.png';
 import Sticker from './Sticker';
+import Hologram from './Hologram';
 import './Hero.css';
 
 const Hero = () => {
-  const [activeTab, setActiveTab] = useState('terminal');
+  const [activeTab, setActiveTab] = useState('profile');
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalLines, setTerminalLines] = useState([
     'Welcome to Shiva\'s interactive shell v1.0.0',
     'Type "help" to see a list of available commands.',
     ''
   ]);
+  const [showThwip, setShowThwip] = useState(false);
   
   const terminalContainerRef = useRef(null);
   const inputRef = useRef(null);
@@ -97,6 +99,14 @@ const Hero = () => {
       setTerminalLines([]);
       setTerminalInput('');
       return;
+    } else if (cleanCmd === 'thwip') {
+      response = [
+        `shiva@dev:~$ ${trimmed}`,
+        'Slinging web...',
+        ''
+      ];
+      setShowThwip(true);
+      setTimeout(() => setShowThwip(false), 2000);
     } else if (cleanCmd === '') {
       response = [`shiva@dev:~$ `];
     } else {
@@ -126,10 +136,18 @@ const Hero = () => {
       <div className="hero-split-container">
         
         {/* Comic Stickers */}
-        <Sticker top="12%" left="92%" rotate={15} color="#004de6">
-          <GiSpiderWeb />
-        </Sticker>
         <Sticker bottom="25%" right="40%" rotate={-10} text="THWIP!" color="#e23636" />
+        
+        {showThwip && (
+          <motion.div 
+            style={{ position: 'absolute', zIndex: 999, top: '50%', left: '50%' }}
+            initial={{ scale: 0, opacity: 1, rotate: 0 }}
+            animate={{ scale: [0, 5, 10], opacity: [1, 1, 0], rotate: 360 }}
+            transition={{ duration: 1 }}
+          >
+            <GiSpiderWeb size={100} color="var(--accent-red)" />
+          </motion.div>
+        )}
 
         <div className="hero-content-side">
           <motion.div
@@ -175,6 +193,9 @@ const Hero = () => {
             <a href="#contact" className="btn-outline">
               Contact Engineer
             </a>
+            <a href="/resume.pdf" download className="btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FiDownload size={18} /> Download Resume
+            </a>
           </motion.div>
 
           <motion.div 
@@ -197,6 +218,10 @@ const Hero = () => {
         >
           <div className="image-aura-bg"></div>
           
+          <div style={{ position: 'absolute', top: '-40px', right: '30px', zIndex: 5 }}>
+            <Hologram />
+          </div>
+
           {/* Dev Workspace Window Mockup */}
           <div className="dev-workspace-window">
             <div className="window-header">

@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiArrowRight } from 'react-icons/fi';
 import Sticker from './Sticker';
+import ProjectModal from './ProjectModal';
 import './Projects.css';
 
 const projects = [
@@ -31,7 +32,16 @@ const projects = [
   }
 ];
 
+const categories = ['All', 'React', 'Python', 'Node.js', 'WebSockets'];
+
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [filter, setFilter] = useState('All');
+
+  const filteredProjects = projects.filter(p => 
+    filter === 'All' ? true : p.tags.includes(filter)
+  );
+
   return (
     <section id="projects" className="projects-section">
       <div className="container" style={{ position: 'relative' }}>
@@ -45,16 +55,31 @@ const Projects = () => {
           >
             Technical <br/> Showcases
           </motion.h2>
+          <div className="filter-bar" style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '40px', flexWrap: 'wrap' }}>
+            {categories.map(cat => (
+              <button 
+                key={cat} 
+                onClick={() => setFilter(cat)}
+                className={`btn-outline ${filter === cat ? 'active' : ''}`}
+                style={filter === cat ? { background: 'var(--accent-red)', color: '#fff', borderColor: 'var(--accent-red)' } : {}}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
         
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div 
-              className="project-card" 
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+        <motion.div layout className="projects-grid">
+          <AnimatePresence>
+            {filteredProjects.map((project, index) => (
+              <motion.div 
+                layout
+                className="project-card" 
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
             >
               <div className="project-content">
                 <div className="project-header">
@@ -78,11 +103,26 @@ const Projects = () => {
                     <span key={tag} className="tag">{tag}</span>
                   ))}
                 </div>
+                
+                <button 
+                  className="btn-outline read-more-btn" 
+                  onClick={() => setSelectedProject(project)}
+                  style={{ marginTop: '20px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}
+                >
+                  Read More <FiArrowRight />
+                </button>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
+
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={!!selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 };

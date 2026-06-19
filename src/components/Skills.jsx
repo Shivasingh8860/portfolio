@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FiCode, FiDatabase, FiLayout, FiTerminal } from 'react-icons/fi';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { FiCode, FiDatabase, FiLayout, FiTerminal, FiShield } from 'react-icons/fi';
 import { FaSpider } from 'react-icons/fa';
 import Sticker from './Sticker';
 import './Skills.css';
@@ -28,7 +28,7 @@ const skillCategories = [
   },
   {
     title: 'Systems & Arch',
-    icon: <FiLayout className="skill-icon" />,
+    icon: <FiShield className="skill-icon" />,
     skills: [
       { name: 'DS & Algorithms', level: 90 },
       { name: 'REST/GraphQL APIs', level: 85 },
@@ -51,18 +51,7 @@ const skillCategories = [
     skills: [
       { name: 'OpenAI', level: 85 },
       { name: 'Pandas & NumPy', level: 90 },
-      { name: 'Scikit-Learn', level: 80 },
-      { name: 'Matplotlib & Seaborn', level: 85 }
-    ]
-  },
-  {
-    title: 'Tools & Platforms',
-    icon: <FiTerminal className="skill-icon" />,
-    skills: [
-      { name: 'Git & GitHub', level: 95 },
-      { name: 'Docker', level: 80 },
-      { name: 'VSCode', level: 95 },
-      { name: 'Jupyter', level: 85 }
+      { name: 'Scikit-Learn', level: 80 }
     ]
   },
   {
@@ -71,80 +60,105 @@ const skillCategories = [
     skills: [
       { name: 'Problem-Solving', level: 95 },
       { name: 'Team Collaboration', level: 90 },
-      { name: 'Communication', level: 90 },
       { name: 'Adaptability', level: 95 }
     ]
   }
 ];
 
+// Interactive 3D Card Component
+const SkillCard = ({ category, index }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    let { left, top, width, height } = currentTarget.getBoundingClientRect();
+    
+    // Calculate rotation (-10 to 10 degrees based on mouse position)
+    const x = (clientX - left - width / 2) / 15;
+    const y = (clientY - top - height / 2) / 15;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+  }
+
+  const transform = useMotionTemplate`perspective(1000px) rotateX(${-mouseY.get()}deg) rotateY(${mouseX.get()}deg)`;
+
+  return (
+    <motion.div
+      className="skill-card-wrapper"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-50px" }}
+    >
+      <motion.div
+        className="skill-card"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ transform }}
+        whileHover={{ scale: 1.02 }}
+      >
+        <div className="skill-card-header">
+          <div className="skill-icon-wrapper">
+            {category.icon}
+          </div>
+          <h3 className="skill-card-title">{category.title}</h3>
+        </div>
+
+        <div className="skill-card-body">
+          {category.skills.map((skill, sIdx) => (
+            <div className="skill-item" key={sIdx}>
+              <div className="skill-info">
+                <span className="skill-name">{skill.name}</span>
+              </div>
+              <div className="skill-progress-bg">
+                <motion.div 
+                  className="skill-progress-fill"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${skill.level}%` }}
+                  transition={{ duration: 1.5, delay: 0.2 + (sIdx * 0.1), ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  <div className="web-shooter-head"></div>
+                </motion.div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Skills = () => {
   return (
     <section id="skills" className="container skills-section">
-      <motion.h2 
-        className="section-title"
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Core Tech <br/> Stack & Skills
-      </motion.h2>
-      
-      <div className="skills-tree-container" style={{ position: 'relative' }}>
-        <Sticker top="-30px" right="-30px" rotate={15} isCircle={true} color="#e23636">
+      <div style={{ position: 'relative' }}>
+        <Sticker top="-40px" right="0" rotate={15} isCircle={true} color="#e23636">
           <FaSpider />
         </Sticker>
-        <div className="tree-root">
-          <motion.div 
-            className="tree-root-label"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <FiTerminal className="root-icon" />
-            <span>shiva_dev_environment/</span>
-          </motion.div>
-          
-          <div className="tree-branches">
-            {skillCategories.map((category, idx) => (
-              <motion.div 
-                className="tree-branch"
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-              >
-                <div className="branch-header">
-                  <div className="branch-connector"></div>
-                  <div className="branch-icon-wrapper">
-                    {category.icon}
-                  </div>
-                  <h3 className="branch-title">{category.title}/</h3>
-                </div>
-                
-                <div className="branch-leaves">
-                  <div className="branch-vertical-line"></div>
-                  {category.skills.map((skill, sIdx) => (
-                    <motion.div 
-                      className="leaf-node" 
-                      key={sIdx}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: (idx * 0.15) + (sIdx * 0.05) + 0.2 }}
-                    >
-                      <div className="leaf-connector"></div>
-                      <div className="skill-badge">
-                        <span className="skill-badge-name">{skill.name}</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        
+        <motion.div 
+          className="skills-header"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="section-title">Core Tech <br/> Stack & Skills</h2>
+          <p className="skills-subtitle">Hover over the cards to interact with the web interface.</p>
+        </motion.div>
+      </div>
+      
+      <div className="skills-grid">
+        {skillCategories.map((category, idx) => (
+          <SkillCard key={idx} category={category} index={idx} />
+        ))}
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMail, FiMapPin, FiCheckCircle } from 'react-icons/fi';
+import { FaSpider } from 'react-icons/fa';
 import Sticker from './Sticker';
 import './Contact.css';
 
@@ -125,9 +126,15 @@ const Contact = () => {
                   exit={{ opacity: 0 }}
                   style={{ textAlign: 'center', padding: '2rem' }}
                 >
-                  <FiCheckCircle size={60} color="var(--accent-primary)" style={{ marginBottom: '1.5rem' }} />
-                  <h3>Message Sent</h3>
-                  <p>Thank you, Shiva will be in touch soon.</p>
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    style={{ display: 'inline-block', marginBottom: '1.5rem' }}
+                  >
+                    <FaSpider size={60} color="var(--accent-red)" />
+                  </motion.div>
+                  <h3>Message Sent, True Believer!</h3>
+                  <p>Thank you. Shiva's spidey-sense is tingling, he will be in touch soon.</p>
                   <button onClick={() => setStatus('idle')} className="btn-outline" style={{ marginTop: '2rem' }}>
                     Send Another
                   </button>

@@ -1,0 +1,118 @@
+.hologram-container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  z-index: 10;
+}
+
+.hologram-core {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: float-holo 4s ease-in-out infinite;
+  transition: transform 0.1s ease-out;
+}
+
+/* Floating animation */
+@keyframes float-holo {
+  0%, 100% { transform: translateY(0) rotateY(0deg) rotateX(0deg); }
+  50% { transform: translateY(-15px) rotateY(180deg) rotateX(15deg); }
+}
+
+/* The central glowing core */
+.holo-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #fff, var(--accent-secondary));
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 40px var(--accent-secondary), 0 0 80px var(--accent-primary);
+}
+
+/* 3D Tesseract Faces */
+.holo-face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--border-comic);
+  background: rgba(0, 85, 255, 0.1);
+  box-shadow: inset 0 0 20px var(--accent-glow);
+  /* The "spider web" grid effect on the faces */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+[data-symbiote="true"] .holo-face {
+  background: rgba(94, 0, 179, 0.1);
+}
+
+.front  { transform: translateZ(50px); }
+.back   { transform: rotateY(180deg) translateZ(50px); }
+.right  { transform: rotateY(90deg) translateZ(50px); }
+.left   { transform: rotateY(-90deg) translateZ(50px); }
+.top    { transform: rotateX(90deg) translateZ(50px); }
+.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+/* Outer spinning rings */
+.holo-ring {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px dashed var(--accent-primary);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  box-shadow: 0 0 10px var(--accent-primary);
+  transform-style: preserve-3d;
+}
+
+.ring-1 {
+  animation: spin-ring-1 8s linear infinite;
+}
+
+.ring-2 {
+  border: 2px solid var(--accent-secondary);
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  width: 220px;
+  height: 220px;
+  top: -60px;
+  left: -60px;
+  animation: spin-ring-2 12s linear infinite reverse;
+}
+
+.ring-3 {
+  border: 1px dotted var(--text-primary);
+  width: 240px;
+  height: 240px;
+  top: -70px;
+  left: -70px;
+  animation: spin-ring-3 15s linear infinite;
+}
+
+@keyframes spin-ring-1 {
+  from { transform: rotateX(60deg) rotateY(0deg) rotateZ(0deg); }
+  to { transform: rotateX(60deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes spin-ring-2 {
+  from { transform: rotateX(45deg) rotateY(45deg) rotateZ(0deg); }
+  to { transform: rotateX(45deg) rotateY(45deg) rotateZ(360deg); }
+}
+
+@keyframes spin-ring-3 {
+  from { transform: rotateX(80deg) rotateY(15deg) rotateZ(0deg); }
+  to { transform: rotateX(80deg) rotateY(15deg) rotateZ(360deg); }
+}

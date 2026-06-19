@@ -1,0 +1,140 @@
+.experience-section {
+  padding: 100px 0;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.experience-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Central Line */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--text-muted);
+  opacity: 0.3;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-content {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-red);
+}
+
+/* Icon positioned on the center line */
+.timeline-icon {
+  position: absolute;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-red);
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(226, 54, 54, 0.3);
+}
+
+.timeline-item.left .timeline-icon {
+  right: -60px;
+}
+
+.timeline-item.right .timeline-icon {
+  left: -60px;
+}
+
+.timeline-title {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.timeline-company {
+  color: var(--accent-blue);
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.timeline-date {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.timeline-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .timeline-line {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding: 20px 20px 20px 80px;
+  }
+  
+  .timeline-item.left, 
+  .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+  
+  .timeline-item.left .timeline-icon,
+  .timeline-item.right .timeline-icon {
+    left: 10px;
+    right: auto;
+  }
+}

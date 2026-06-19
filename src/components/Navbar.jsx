@@ -6,6 +6,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [webSlingTarget, setWebSlingTarget] = useState(null);
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
   });
@@ -32,7 +33,30 @@ const Navbar = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Resume', href: '/resume.pdf', download: true },
   ];
+
+  const handleNavClick = (e, link) => {
+    if (link.download) return;
+    e.preventDefault();
+    setIsOpen(false);
+    
+    // Trigger web sling animation
+    setWebSlingTarget(link.href);
+    
+    // Wait for web to shoot down, then scroll
+    setTimeout(() => {
+      const targetElement = document.querySelector(link.href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      // Remove the web after scroll
+      setTimeout(() => {
+        setWebSlingTarget(null);
+      }, 800);
+    }, 400);
+  };
 
   return (
     <header className={`navbar ${scrolled ? 'glass scrolled' : ''}`}>
@@ -47,7 +71,14 @@ const Navbar = () => {
             <ul className="nav-list">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="nav-link">{link.name}</a>
+                  <a 
+                    href={link.href} 
+                    className="nav-link" 
+                    onClick={(e) => handleNavClick(e, link)}
+                    {...(link.download ? { download: true } : {})}
+                  >
+                    {link.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -89,7 +120,8 @@ const Navbar = () => {
                   <a 
                     href={link.href} 
                     className="mobile-nav-link"
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => handleNavClick(e, link)}
+                    {...(link.download ? { download: true } : {})}
                   >
                     {link.name}
                   </a>
@@ -97,6 +129,28 @@ const Navbar = () => {
               ))}
             </ul>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Web Sling Animation Overlay */}
+      <AnimatePresence>
+        {webSlingTarget && (
+          <motion.div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: '50%',
+              width: '4px',
+              backgroundColor: 'var(--text-primary)',
+              zIndex: 9999,
+              transformOrigin: 'top center',
+              boxShadow: '0 0 15px var(--accent-primary)'
+            }}
+            initial={{ height: 0 }}
+            animate={{ height: '100vh' }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          />
         )}
       </AnimatePresence>
     </header>

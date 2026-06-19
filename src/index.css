@@ -35,6 +35,22 @@
   --bg-nav: rgba(245, 248, 252, 0.95);
 }
 
+:root[data-symbiote="true"] {
+  --bg-primary: #000000;      /* Pitch Black */
+  --bg-secondary: #050010;    /* Deep Void */
+  --bg-card: rgba(10, 0, 15, 0.9); /* Translucent dark purple */
+  --text-primary: #ffffff;    /* Stark white */
+  --text-secondary: #8a7a9e;  /* Muted purple-gray */
+  --accent-primary: #ffffff;  /* Symbiote White */
+  --accent-secondary: #5e00b3;/* Venom Purple */
+  --accent-tertiary: #1a0033; /* Dark Symbiote */
+  --border-comic: #ffffff;    /* White glowing borders */
+  --border-light: rgba(94, 0, 179, 0.5);
+  --accent-glow: rgba(94, 0, 179, 0.8);
+  --bg-nav: rgba(0, 0, 0, 0.95);
+  filter: contrast(1.1) drop-shadow(0 0 5px rgba(94,0,179,0.3));
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
