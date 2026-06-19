@@ -126,7 +126,7 @@ const Hero = () => {
       <div className="hero-split-container">
         
         {/* Comic Stickers */}
-        <Sticker top="12%" left="42%" rotate={15} color="#004de6">
+        <Sticker top="12%" left="92%" rotate={15} color="#004de6">
           <GiSpiderWeb />
         </Sticker>
         <Sticker bottom="25%" right="40%" rotate={-10} text="THWIP!" color="#e23636" />
